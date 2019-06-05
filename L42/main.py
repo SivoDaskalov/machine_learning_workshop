@@ -1,7 +1,7 @@
 from keras.optimizers import SGD
 
-from data import load_data
-from model import get_model
+from L42.data import load_data
+from L42.model import get_model
 
 batch_size = 128
 nb_epoch = 20

@@ -114,3 +114,5 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+L42/notMNIST_small.mat
+L42/notMNIST_small.tar
