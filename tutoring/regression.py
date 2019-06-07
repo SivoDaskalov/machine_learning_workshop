@@ -95,7 +95,7 @@ def enet_model_selection(X, y):
 
 
 def enet_cv_model_selection(X, y):
-    kf = KFold(n_splits=5)
+    kf = KFold(n_splits=6)
     best_model, best_mse = None, None
     hyperparameter_combinations = list(product(alphas, l1_ratios))
     for alpha, l1_ratio in hyperparameter_combinations:
@@ -111,7 +111,7 @@ def enet_cv_model_selection(X, y):
         cur_mse = reduce(lambda x, y: x + y, cv_mse) / len(cv_mse)
         if best_mse is None or best_mse > cur_mse:
             best_mse = cur_mse
-            best_model = model
+            best_model = train_elastic_net(X, y, alpha, l1_ratio)
 
     print_coef(best_model.coef_.tolist(), X.columns)
     print("Best Elastic Net cross-validated MSE %.2f, alpha=%.2f; l1_ratio=%.2f\n" % (

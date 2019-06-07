@@ -100,7 +100,9 @@ def batch_train_models(X, y):
     svc = cv_model_selection(X_train, y_train, SVC, kernel=["linear", "rbf"], C=[1.0, 5.0])
     rfc = cv_model_selection(X_train, y_train, RandomForestClassifier, n_estimators=[10, 100, 1000])
 
-    os.makedirs(os.path.join(os.curdir, 'dumps'))
+    dumps_dir = os.path.join(os.curdir, 'dumps')
+    if not os.path.exists(dumps_dir):
+        os.makedirs(dumps_dir)
     with open("dumps/knn", "wb") as f:
         pickle.dump(knn, f)
     with open("dumps/svc", "wb") as f:
