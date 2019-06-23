@@ -75,7 +75,7 @@ def plot_similarities(dataframe, title=None, cmap=plt.cm.Blues, vmin=0.5, vmax=1
     if title:
         plt.title(title, y=1.12)
     if not label_color_thresh:
-        label_color_thresh = vmin + 0.6 * (vmax - vmin)
+        label_color_thresh = vmin + 0.5 * (vmax - vmin)
 
     plt.imshow(dataframe.as_matrix(), interpolation='nearest', cmap=cmap, vmin=vmin, vmax=vmax)
     plt.colorbar()
@@ -97,5 +97,6 @@ for vector_size in vector_sizes:
     features = batch_extractor(os.path.join(os.curdir, 'images'), vector_size=vector_size)
     similarities = build_cosine_similarity_matrix(features)
     similarities.to_csv('similarities_%d.csv' % vector_size)
-    figure = plot_similarities(similarities, title='Cosine similarity between %d KAZE features' % vector_size)
+    # figure = plot_similarities(similarities, title='Cosine similarity between %d KAZE features' % vector_size)
+    figure = plot_similarities(similarities, vmin=0.0)
     figure.savefig("%s/similarities_%d.png" % (os.curdir, vector_size))
